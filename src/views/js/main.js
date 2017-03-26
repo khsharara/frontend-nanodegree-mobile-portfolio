@@ -449,10 +449,13 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    // PERFORMANCE BOOSTER: moved pizza sizing code outside of the for loop since all pizzas are the same size. Used a variable (masterPizza) to refactor and reduce the amount of queries made on the DOM
+    var masterPizza = document.querySelectorAll(".randomPizzaContainer");
+    var dx = determineDx(masterPizza[0], size);
+    var newwidth = (masterPizza[0].offsetWidth + dx) + 'px';
+    
+    for (var i = 0; i < masterPizza.length; i++) {
+      masterPizza[i].style.width = newwidth;
     }
   }
 
@@ -502,8 +505,10 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+  // PERFORMANCE BOOSTER: Moved out of the for loop and refactored code into a variable (phasePosition) to reduce the number of queries made to the DOM
+  var phasePosition = (document.body.scrollTop / 1250);
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin(phasePosition+ (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
