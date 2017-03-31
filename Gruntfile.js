@@ -7,6 +7,10 @@ module.exports = function(grunt) {
         build: {
            src: 'src/js/perfmatters.js',
            dest: 'dist/js/perfmatters.js'
+        },
+        build: {
+           src: 'src/views/js/main.js',
+           dest: 'dist/views/js/main.js'
         }
 
     },
