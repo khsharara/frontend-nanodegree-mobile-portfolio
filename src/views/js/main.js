@@ -451,7 +451,7 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     // PERFORMANCE BOOSTER: moved pizza sizing code outside of the for loop since all pizzas are the same size. Used a variable (masterPizza) to refactor and reduce the amount of queries made on the DOM 
     // + used getElementsByClassName() instead of querySelectorAll()
-    var masterPizza = document.getElementsByClassName(".randomPizzaContainer");
+    var masterPizza = document.getElementsByClassName("randomPizzaContainer");
     var dx = determineDx(masterPizza[0], size);
     var newwidth = (masterPizza[0].offsetWidth + dx) + 'px';
     
